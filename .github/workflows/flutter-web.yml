@@ -10,24 +10,24 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      -name: Setup Java (Required for Flutter tools)
-      uses:actions/setup-java@v3
+      - name: Setup Java (Required for Flutter tools)
+        uses: actions/setup-java@v3
         with:
-          distribution: 'zulu'
-          java version: '17'
+         distribution: 'zulu'
+         java version: '17'
 
-      -name: Setup Flutter
-      uses: subosito/flutter-action@v2
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
 
-      -name: Build Web App    
-      - run:|
-         flutter pub get
-         flutter build web --release --base-href "/Calculator-app/"
+      - name: Build Web App    
+       run:|
+            flutter pub get
+            flutter build web --release --base-href "/Calculator-app/"
       
-      -name: Deploy to Github Pages   
-      - uses: JamesIves/github-pages-deploy-action@v4
+      - name: Deploy to Github Pages   
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: build/web
           branch: gh-pages
