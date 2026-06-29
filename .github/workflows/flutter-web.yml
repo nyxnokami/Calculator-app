@@ -13,7 +13,8 @@ jobs:
         with:
           flutter-version: '3.44.4'
       - run: flutter pub get
-      - run: flutter build web --base-href "/A-calculator-/"
+      - run: flutter create . --platforms web 
+      - run: flutter build web --base-href "/Calculator-app/"
       - uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
