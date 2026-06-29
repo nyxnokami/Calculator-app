@@ -1,33 +1,37 @@
+
+
 name: Deploy Flutter Web
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main # Triggers the build every time you push to main
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Setup Java (Required for Flutter tools)
         uses: actions/setup-java@v3
         with:
-         distribution: 'zulu'
-         java version: '17'
+          distribution: 'zulu'
+          java-version: '17'
 
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
 
-      - name: Build Web App    
-       run:|
-            flutter pub get
-            flutter build web --release --base-href "/Calculator-app/"
-      
-      - name: Deploy to Github Pages   
+      - name: Build Web App
+        run: |
+          flutter pub get
+          flutter build web --release --base-href "/Calculator-app/"
+
+      - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: build/web
-          branch: gh-pages
+          folder: build/web # Deploys the actual compiled web files
+          branch: gh-pages # Pushes them to a clean branch for hosting
